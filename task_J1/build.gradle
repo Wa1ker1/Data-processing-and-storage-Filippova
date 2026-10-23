@@ -1,0 +1,36 @@
+plugins {
+    id 'application'
+}
+
+group = 'ru.nsu'
+version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+application {
+    mainClass = 'ru.nsu.Server'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.bouncycastle:bcpkix-jdk18on:1.86'
+    testImplementation platform('org.junit:junit-bom:6.0.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'app.classpath', sourceSets.main.runtimeClasspath.asPath
+}
+
+tasks.register('client', JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'ru.nsu.Client'
+}
