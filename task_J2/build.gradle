@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'ru.nsu'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.0'
+}
+
+application {
+    mainClass = 'ru.nsu.Main'
+}
+
+tasks.named('run', JavaExec) {
+    standardInput = System.in
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
